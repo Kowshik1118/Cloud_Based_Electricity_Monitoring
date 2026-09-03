@@ -1,0 +1,7 @@
+{
+  "name": "cloud-electricity-usage-monitor",
+  "version": "1.0.0",
+  "description": "Cloud-Based Electricity Usage Monitor",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" }
+}
