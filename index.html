@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ElectroCloud - Electricity Monitor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="loginPage" class="auth">
+  <div class="auth-card">
+    <div class="logo">⚡ ElectroCloud</div>
+    <p class="muted">Cloud-Based Electricity Usage Monitor</p>
+    <div class="tabs"><button id="loginTab" class="active" onclick="showLogin()">Login</button><button id="registerTab" onclick="showRegister()">Register</button></div>
+    <form id="loginForm">
+      <input id="loginEmail" type="email" placeholder="Email" required>
+      <input id="loginPassword" type="password" placeholder="Password" required>
+      <button class="primary" type="submit">Login</button>
+      <p class="hint">Demo: admin@example.com / admin123</p>
+    </form>
+    <form id="registerForm" hidden>
+      <input id="regName" placeholder="Full name" required>
+      <input id="regEmail" type="email" placeholder="Email" required>
+      <input id="regPassword" type="password" placeholder="Password" minlength="4" required>
+      <button class="primary" type="submit">Create Account</button>
+    </form>
+    <p id="authMsg"></p>
+  </div>
+</div>
+
+<div id="app" hidden>
+<header><div class="brand">⚡ ElectroCloud</div><div><span id="welcome"></span><button class="logout" onclick="logout()">Logout</button></div></header>
+<main>
+<section class="hero"><div><h1>Electricity Usage Dashboard</h1><p>Monitor consumption, estimate your bill and find high-usage appliances.</p></div><div class="badge">☁ Cloud Ready</div></section>
+
+<div class="cards">
+ <div class="card"><span>Total Units</span><strong id="totalUnits">0</strong><small>kWh</small></div>
+ <div class="card"><span>Estimated Bill</span><strong id="bill">₹0</strong><small>sample tariff</small></div>
+ <div class="card"><span>Monthly Limit</span><strong>300</strong><small>kWh</small></div>
+ <div class="card"><span>Usage Status</span><strong id="status">Good</strong><small id="statusText">Within limit</small></div>
+</div>
+
+<div class="grid">
+<section class="panel">
+<h2>➕ Add Electricity Usage</h2>
+<form id="usageForm" class="usage-form">
+<input id="appliance" placeholder="Appliance (e.g. Fan)" required>
+<input id="power" type="number" min="1" placeholder="Power in Watts" required>
+<input id="hours" type="number" min="0.1" step="0.1" placeholder="Hours/day" required>
+<input id="days" type="number" min="1" max="31" placeholder="Days" required>
+<input id="date" type="date" required>
+<button class="primary" type="submit">Add Usage</button>
+</form>
+<div class="result-box">Formula: <b>Units = Watts × Hours × Days ÷ 1000</b></div>
+</section>
+
+<section class="panel">
+<h2>📊 Appliance Consumption</h2>
+<canvas id="chart"></canvas>
+</section>
+</div>
+
+<section class="panel">
+<div class="row"><h2>📋 Usage History</h2><button class="secondary" onclick="loadUsage()">Refresh</button></div>
+<div class="table-wrap"><table><thead><tr><th>Date</th><th>Appliance</th><th>Power</th><th>Hours</th><th>Days</th><th>Units</th><th>Action</th></tr></thead><tbody id="history"></tbody></table></div>
+</section>
+</main>
+<footer>ElectroCloud • Engineering Project Demo</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
